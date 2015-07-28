@@ -1,6 +1,6 @@
 if (Meteor.isClient) {
   Template.home.events({
-    
+
   });
 
   Template.home.created = function() {
