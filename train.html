@@ -1,26 +1,28 @@
 <head>
   <title>train</title>
-
-  <script type="text/javascript" src="">
-  </script>
+  <meta http-equiv="cleartype" content="on">
+  <meta name="MobileOptimized" content="320">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 </head>
 
 <body>
 </body>
 
 <template name="home">
-  <div class="main">
-    <div class="window">
-      <h1>TRAINTRIP</h1>
+  <nav id="menu" class="menu">
+  </nav>
+<button class="toggle-button">☰</button>
+  <main id="panel" class="panel">
+    <div class="main">
+      <div class="window">
+        <h1>TRAINTRIP</h1>
+      </div>
+      <div class="overlay"></div>
+      <div class="mapContainer">
+        <div class="map" id="map"></div>
+      </div>
     </div>
-    <div class="overlay"></div>
-    <div class="mapContainer">
-      <div class="map" id="map"></div>
-    </div>
-  </div>
-
-</template>
-
-<template name="items">
-  <p>Hello World</p>
+  </main>
 </template>

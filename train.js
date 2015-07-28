@@ -6,8 +6,22 @@ if (Meteor.isClient) {
   Template.home.created = function() {
     Meteor.Loader.loadJs("https://maps.googleapis.com/maps/api/js?key=AIzaSyBVrZhSoNT6AExUh70_sHNSUzenFi8wHKM&libraries=geometry,places&callback=init");
   };
+
   Template.home.rendered = function() {
 
+    var template = this;
+
+    slideoutInstance = new Slideout({
+      'menu': template.$(".menu").get(0),
+      'panel': template.$(".panel").get(0),
+      'padding': window.innerWidth * 0.8,
+      'tolerance': 70,
+      'side': "right"
+    });
+    // Toggle button
+  document.querySelector('.toggle-button').addEventListener('click', function() {
+    slideoutInstance.toggle();
+  });
   }
 
 }

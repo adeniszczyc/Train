@@ -8,11 +8,6 @@
    License: none (public domain)
 */
 body {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 h1 {
   font-family: 'Oswald';
@@ -20,10 +15,14 @@ h1 {
   font-color: white;
   color: white;
   z-index: 3;
-  position: relative;
 }
 .window {
   z-index: 4;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .mapContainer {
   position: fixed;
@@ -50,4 +49,37 @@ div.overlay {
   width: 100vw;
   height: 100vh;
   z-index: 2;
+}
+.slideout-menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 0;
+  width: 256px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: none;
+}
+.slideout-panel {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+}
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+  overflow: hidden;
+}
+.slideout-open .slideout-menu {
+  display: block;
+}
+.toggle-button {
+  z-index: 4;
+  position: absolute;
+  border: 0;
+  right: 0;
+  top: 0;
 }
