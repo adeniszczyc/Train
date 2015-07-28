@@ -9,5 +9,6 @@ autopublish
 insecure
 fourseven:scss
 skeleton:skeleton
+iron:router
 mrt:external-file-loader
 dburles:google-maps
