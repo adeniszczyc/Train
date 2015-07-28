@@ -4,7 +4,7 @@ if (Meteor.isClient) {
   });
 
   Template.home.created = function() {
-	  Meteor.Loader.loadJs("https://maps.googleapis.com/maps/api/js?key=AIzaSyBVrZhSoNT6AExUh70_sHNSUzenFi8wHKM&libraries=geometry,places&callback=init");
+    Meteor.Loader.loadJs("https://maps.googleapis.com/maps/api/js?key=AIzaSyBVrZhSoNT6AExUh70_sHNSUzenFi8wHKM&libraries=geometry,places&callback=init");
   };
   Template.home.rendered = function() {
 
@@ -13,14 +13,14 @@ if (Meteor.isClient) {
 }
 
 
-Router.route('/', function () {
+Router.route('/', function() {
   this.render('home');
 });
 
 Router.route('/items');
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
+  Meteor.startup(function() {
     // code to run on server at startup
   });
 }
