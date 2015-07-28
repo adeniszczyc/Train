@@ -1,5 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald:300);
 /* CSS declarations go here */
-
 /*=============================
 =            Reset            =
 =============================*/
@@ -10,11 +10,13 @@
 */
 
 body {
+  height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 h1 {
-
+  font-family: 'Oswald';
+  letter-spacing: 25px;
 }
