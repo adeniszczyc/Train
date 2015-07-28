@@ -9,3 +9,5 @@ autopublish
 insecure
 fourseven:scss
 skeleton:skeleton
+mrt:external-file-loader
+dburles:google-maps
