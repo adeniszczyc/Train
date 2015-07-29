@@ -54,7 +54,7 @@ window.init = function() {
         me.getPlacesPoints = function(points) {
 
             return new Promise(function(resolve, reject) {
-                
+
                 var result = [];
                 var end = points.length;
                 var count = 0;
@@ -67,7 +67,7 @@ window.init = function() {
                         if (count == end) {
                             resolve(result);
                         }
-          
+
                     });
                 });
 
@@ -88,8 +88,8 @@ window.init = function() {
         disableDefaultUI: true, // a way to quickly hide all controls
         mapTypeControl: false,
         scaleControl: true,
-        panControl: true,
-        zoomControl: true,
+        panControl: false,
+        zoomControl: false,
         zoomControlOptions: {
             style: google.maps.ZoomControlStyle.LARGE
         },
@@ -379,7 +379,7 @@ window.init = function() {
 
 
             });
-             
+
              return points;
         }
 

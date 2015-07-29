@@ -25,6 +25,7 @@ h1 {
   flex-direction: column;
 }
 .childFlex {
+  display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
@@ -103,5 +104,12 @@ span {
   font-color: white;
   color: white;
   text-shadow: 2px 4px #000;
-  vertical-align: top;
+  vertical-align: inherit;
+  line-height: 0.5;
+}
+.form {
+  margin-bottom: 0;
+}
+.button-submit {
+  margin-top: 1vh;
 }
