@@ -59,6 +59,7 @@ div.overlay {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   display: none;
+  background-color: #EEEEEE;
 }
 .slideout-panel {
   position: relative;
@@ -85,4 +86,8 @@ div.overlay {
   font-size: 2vw;
   color: white;
   font-family: 'Oswald';
+}
+button.toggle-button:hover {
+  color: #B2B2B2;
+  font-style: none;
 }
