@@ -13,6 +13,12 @@
 <template name="home">
 
   <nav id="menu" class="menu">
+  <h1>adfs</h1>
+    <div class="routes">
+      {{#each routes}}
+        {{> route}}
+      {{/each}}
+    </div>
   </nav>
   <button class="toggle-button">☰</button>
 
@@ -28,6 +34,25 @@
 
       </div>
       
+      <div class="submenu">
+        <h3>Doncaster &rarr; Hull</h3> 
+
+        <form id="routeOptions" class="new-route" action="#">
+          <input type="submit" id="saveRoute" value="Save button" />
+          
+          <input type="hidden" name="from" value="Sheffield" />
+          <input type="hidden" name="to" value="Hull" />
+
+          <select id="bars" name="rating">
+            <option value="1">Poor</option>
+            <option value="2">Average</option>
+            <option value="3">Good</option>
+            <option value="4">Great</option>
+            <option value="5">Outstanding</option>
+          </select>
+        </form>
+
+      </div>
       <div class="mapContainer">
         <div class="map" id="map"></div>
       </div>
@@ -35,4 +60,14 @@
     </div>
   </main>
 
+</template>
+
+<template name="route">
+
+  <li>
+    
+    <div class="mapSmall"></div>
+    {{from}} to {{to}}
+
+  </li>
 </template>

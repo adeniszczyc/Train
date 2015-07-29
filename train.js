@@ -1,7 +1,14 @@
+Routes = new Mongo.Collection("routes");
+
 if (Meteor.isClient) {
   Template.home.events ({
   });
 
+  Template.home.helpers({
+    routes: function () {
+      return Routes.find({});
+    }
+  });
   Template.home.created = function() {
     Meteor.Loader.loadJs("https://maps.googleapis.com/maps/api/js?key=AIzaSyBVrZhSoNT6AExUh70_sHNSUzenFi8wHKM&libraries=geometry,places&callback=init");
   };
@@ -25,6 +32,28 @@ if (Meteor.isClient) {
       slideoutInstance.toggle();
     });
   }
+
+  Template.home.events({
+    "submit .new-route": function (event) {
+
+
+      event.preventDefault();
+ 
+      // Get value from form element
+      var from = event.target.from.value;
+      var to = event.target.to.value;
+      var rating = event.target.rating.value;
+ 
+      // Insert a task into the collection
+      Routes.insert({
+        from: from,
+        to:to,
+        rating:rating
+      });
+ 
+
+    }
+  });
 
 }
 

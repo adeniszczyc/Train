@@ -412,11 +412,17 @@ window.init = function() {
         }
 
 
+        function barRating() {
+            $('#bars').barrating({
+                theme: 'bars-movie'
+            });
+        }
 
         var me = {};
 
         me.bindEvents = function() {
             $("#routeSubmit").on("click", findRoute);
+            barRating();
         };
 
         return me;
