@@ -22,6 +22,12 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+.childFlex {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 .mapContainer {
   position: fixed;
@@ -90,4 +96,12 @@ div.overlay {
 button.toggle-button:hover {
   color: #B2B2B2;
   font-style: none;
+}
+span {
+  font-size: 5vw;
+  font-family: 'Oswald';
+  font-color: white;
+  color: white;
+  text-shadow: 2px 4px #000;
+  vertical-align: top;
 }

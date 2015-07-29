@@ -21,15 +21,18 @@
     <div class="main">
       <div class="window">
         <h1>TRAINTRIP</h1>
-      </div>
-      <input type="text" id="routeFrom" />
-      <input type="text" id="routeTo" />
-      <input type="button" id="routeSubmit" valud="Find route" />
-      <div class="mapContainer">
-        <div class="map" id="map"></div>
-      </div>
+        <div class="childFlex">
+          <input type="text" id="routeFrom" class="form" placeholder="From" />
+          <span>&rarr;</span>
+          <input type="text" id="routeTo" class="form" placeholder="To" />
+        </div>
+          <input type="button" id="routeSubmit" value="Find route" />
+        </div>
+        <div class="mapContainer">
+          <div class="map" id="map"></div>
+        </div>
 
-    </div>
+      </div>
   </main>
 
 </template>
