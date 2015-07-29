@@ -7,14 +7,13 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-body {
-}
 h1 {
   font-family: 'Oswald';
   letter-spacing: 25px;
   font-color: white;
   color: white;
   z-index: 3;
+  text-shadow: 2px 4px #000;
 }
 .window {
   z-index: 4;
@@ -80,6 +79,11 @@ div.overlay {
   z-index: 4;
   position: absolute;
   border: 0;
-  right: 0;
-  top: 0;
+  right: 2vw;
+  top: 2vh;
+  width: 2vw;
+  height: 2vw;
+  font-size: 2vw;
+  color: white;
+  font-family: 'Oswald';
 }
