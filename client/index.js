@@ -395,6 +395,10 @@ window.init = function() {
             mapId = id;
         }
 
+        me.setDisableInteractivity = function() {
+            map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
+        }
+
         return me;
     };
     
@@ -416,6 +420,7 @@ window.init = function() {
                 var map = new _googleMaps();
                 map.setId(from + to);
                 map.init();
+                map.setDisableInteractivity();
 
                 var directions = map.findDirections(from, to);
 
@@ -448,7 +453,8 @@ window.init = function() {
                     $("#routeName").html(from + "&rarr;" + to);
                     $("#formFrom").attr("value", from);
                     $("#formTo").attr("value", to);
-                    
+                    $("#submenu").removeClass("hidden");
+                    $("#window").hide();
                 })
             });
         }

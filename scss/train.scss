@@ -11,6 +11,13 @@
 
 */
 
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
   font-family: 'Open Sans';
   font-weight: 700;
@@ -33,6 +40,9 @@ h1 {
   align-items: center;
   flex-direction: column;
 }
+.window.hidden {
+  display:none;
+}
 .childFlex {
   display: flex;
   flex-direction: row;
@@ -53,10 +63,6 @@ h1 {
   height: 100vh;
 }
 
-.mapSmall {
-  width:250px;
-  height:250px;
-}
 
 div.overlay {
   position: absolute;
@@ -78,8 +84,11 @@ div.overlay {
   
   padding:2rem;
   width:50%;
+  height:200px;
   background:rgba(0,0,0,0.3);
   color:#fff;
+  
+  transition: all 0.5s ease;
 
   h3 {
     text-transform: uppercase;
@@ -87,9 +96,15 @@ div.overlay {
     font-size:2rem;
   }
 }
+.submenu.hidden {
+  position: fixed;
+  bottom: -200px;
+  right: 0;
+}
 
 .menu {
-  padding-left:25vw;
+  padding-top:10vh;
+  padding-left:15vw;
 }
 
 .slideout-menu {
@@ -149,4 +164,59 @@ span {
 }
 .button-submit {
   margin-top: 2vh;
+}
+
+.routes {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-flow: row wrap;
+  justify-content: flex-start;
+
+   -webkit-flex-direction: row; 
+   flex-direction: row;
+
+}
+.mapListItem {
+    text-transform: uppercase;
+    padding:15px;
+    cursor:pointer;
+}
+
+.mapListItem:hover {
+    background-color:rgba(0,0,0,0.05);
+}
+
+.mapItem {
+  width: 200px;
+  height: 180px;
+  overflow:hidden;
+  text-align: center;
+  padding: 5px;
+
+ 
+}
+
+.mapSmallHolder {
+  width: 200px;
+  height: 180px;
+  overflow:hidden;
+  text-align: center;
+}
+
+.mapSmallInfo {
+  padding:1rem 0;
+}
+
+.mapSmall {
+  margin-top:-20px;
+  width:100%;
+  height:220px;
 }

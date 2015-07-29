@@ -24,7 +24,7 @@ if (Meteor.isClient) {
     slideoutInstance = new Slideout({
       'menu': template.$(".menu").get(0),
       'panel': template.$(".panel").get(0),
-      'padding': window.innerWidth * 0.8,
+      'padding': window.innerWidth * 0.9,
       'tolerance': 70,
       'side': "right"
     });
@@ -47,7 +47,7 @@ if (Meteor.isClient) {
       
       console.log(from);
       console.log(to);
-      
+
       // Insert a task into the collection
       Routes.insert({
         from: from,

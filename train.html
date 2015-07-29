@@ -25,17 +25,17 @@
   <main id="panel" class="panel">
 
     <div class="main">
-      <div class="window">
+      <div class="window" id="window">
         <h1>TRAINTRIP</h1>
         <div class="childFlex">
           <input type="text" id="routeFrom" class="form" placeholder="From" />
           <span>&rarr;</span>
           <input type="text" id="routeTo" class="form" placeholder="To" />
         </div>
-          <input type="button" id="routeSubmit" value="Find route" class="button-submit" />
-        </div>
+        <input type="button" id="routeSubmit" value="Find route" class="button-submit" />
+      </div>
       
-       <div class="submenu">
+       <div class="submenu hidden" id="submenu">
           <h3 id="routeName">Doncaster &rarr; Hull</h3> 
 
           <form id="routeOptions" class="new-route" action="#">
@@ -64,8 +64,12 @@
 </template>
 
 <template name="route">
-
-    <div class="mapSmall" from={{from}} to={{to}} id={{from}}{{to}}></div>
-    {{from}} to {{to}}
-
+    <div class="mapListItem">
+      <div class="mapSmallHolder">
+        <div class="mapSmall" from={{from}} to={{to}} id={{from}}{{to}}></div>
+      </div>
+      <div class="mapSmallInfo">
+      {{from}} &rarr;<br/> {{to}}
+      </div>
+    </div>
 </template>
