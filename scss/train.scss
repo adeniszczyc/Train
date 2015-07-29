@@ -75,7 +75,7 @@ div.overlay {
   position: fixed;
   bottom: 0;
   right: 0;
-  
+
   padding:2rem;
   width:50%;
   background:rgba(0,0,0,0.3);
@@ -149,4 +149,12 @@ span {
 }
 .button-submit {
   margin-top: 2vh;
+}
+@media (max-width: 450px) {
+  .childFlex {
+    flex-direction: column;
+  }
+  span {
+    display: none;
+  }
 }
