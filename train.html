@@ -27,37 +27,38 @@
     <div class="main">
       <div class="window">
         <h1>TRAINTRIP</h1>
-        
-        <input type="text" id="routeFrom" />
-        <input type="text" id="routeTo" />
-        <input type="button" id="routeSubmit" valud="Find route" />
-
-      </div>
+        <div class="childFlex">
+          <input type="text" id="routeFrom" class="form" placeholder="From" />
+          <span>&rarr;</span>
+          <input type="text" id="routeTo" class="form" placeholder="To" />
+        </div>
+          <input type="button" id="routeSubmit" value="Find route" />
+        </div>
       
-      <div class="submenu">
-        <h3>Doncaster &rarr; Hull</h3> 
+       <div class="submenu">
+          <h3>Doncaster &rarr; Hull</h3> 
 
-        <form id="routeOptions" class="new-route" action="#">
-          <input type="submit" id="saveRoute" value="Save button" />
-          
-          <input type="hidden" name="from" value="Sheffield" />
-          <input type="hidden" name="to" value="Hull" />
+          <form id="routeOptions" class="new-route" action="#">
+            <input type="submit" id="saveRoute" value="Save button" />
+            
+            <input type="hidden" name="from" value="Sheffield" />
+            <input type="hidden" name="to" value="Hull" />
 
-          <select id="bars" name="rating">
-            <option value="1">Poor</option>
-            <option value="2">Average</option>
-            <option value="3">Good</option>
-            <option value="4">Great</option>
-            <option value="5">Outstanding</option>
-          </select>
-        </form>
-
-      </div>
-      <div class="mapContainer">
-        <div class="map" id="map"></div>
-      </div>
-
-    </div>
+            <select id="bars" name="rating">
+              <option value="1">Poor</option>
+              <option value="2">Average</option>
+              <option value="3">Good</option>
+              <option value="4">Great</option>
+              <option value="5">Outstanding</option>
+            </select>
+          </form>
+  
+        </div>
+        
+        <div class="mapContainer">
+          <div class="map" id="map"></div>
+        </div>
+  </div>
   </main>
 
 </template>
