@@ -13,9 +13,8 @@
 <template name="home">
 
   <nav id="menu" class="menu">
-  <h1>adfs</h1>
     <div class="routes">
-      {{#each routes}}
+       {{#each routes}}
         {{> route}}
       {{/each}}
     </div>
@@ -24,6 +23,7 @@
 
 
   <main id="panel" class="panel">
+
     <div class="main">
       <div class="window">
         <h1>TRAINTRIP</h1>
@@ -36,13 +36,13 @@
         </div>
       
        <div class="submenu">
-          <h3>Doncaster &rarr; Hull</h3> 
+          <h3 id="routeName">Doncaster &rarr; Hull</h3> 
 
           <form id="routeOptions" class="new-route" action="#">
             <input type="submit" id="saveRoute" value="Save button" />
             
-            <input type="hidden" name="from" value="Sheffield" />
-            <input type="hidden" name="to" value="Hull" />
+            <input type="hidden" name="from" id="formFrom" value="" />
+            <input type="hidden" name="to" id="formTo" value="" />
 
             <select id="bars" name="rating">
               <option value="1">Poor</option>
@@ -65,10 +65,7 @@
 
 <template name="route">
 
-  <li>
-    
-    <div class="mapSmall"></div>
+    <div class="mapSmall" from={{from}} to={{to}} id={{from}}{{to}}></div>
     {{from}} to {{to}}
 
-  </li>
 </template>

@@ -53,8 +53,8 @@ h1 {
 }
 
 .mapSmall {
-  width:400px;
-  height:400px;
+  width:250px;
+  height:250px;
 }
 
 div.overlay {
@@ -98,7 +98,6 @@ div.overlay {
   bottom: 0;
   right: 0;
   z-index: 0;
-  width: 256px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   display: none;

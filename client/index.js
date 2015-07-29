@@ -80,16 +80,19 @@ window.init = function() {
     }());
 
 
-    var _googleMaps = (function() {
+    var _googleMaps = function() {
 
         var map;
+        var mapId;
+
         var mapAPI = {};
+
         mapAPI.mapOptions = {
         disableDefaultUI: true, // a way to quickly hide all controls
         mapTypeControl: false,
         scaleControl: true,
-        panControl: true,
-        zoomControl: true,
+        panControl: false,
+        zoomControl: false,
         zoomControlOptions: {
             style: google.maps.ZoomControlStyle.LARGE
         },
@@ -212,7 +215,7 @@ window.init = function() {
         }]
 
 
-    };
+        };
 
         var directionsDisplay;
         var directionsService = new google.maps.DirectionsService();
@@ -245,7 +248,8 @@ window.init = function() {
         }
 
         function setupMap() {
-            map = new google.maps.Map(document.getElementById('map'),
+
+            map = new google.maps.Map(document.getElementById(mapId),
                 mapAPI.mapOptions);
 
             var rendererOptions = {
@@ -387,13 +391,46 @@ window.init = function() {
             return angleBetweenTwoPoints(lat1, lng1, lat2, lng2)
         }
 
+        me.setId = function(id) {
+            mapId = id;
+        }
+
         return me;
+    };
+    
+    var _googleMapsMain = new _googleMaps();
+    _googleMapsMain.setId("map");
+
+    
+    var _smallMaps = (function() {
+
+        var me = {};
+
+        me.init = function() {
+            $(".mapSmall").each(function(key, val) {
+                var from = $(this).attr("from");
+                var to = $(this).attr("to");
+                
+                console.log('Debug: Init map')
+
+                var map = new _googleMaps();
+                map.setId(from + to);
+                map.init();
+
+                var directions = map.findDirections(from, to);
+
+                
+            });
+        }
+
+        return me;
+
     }());
 
+    slideoutInstance.on('open', function() {
+        _smallMaps.init();
+    });
 
-    var _mapData = (function() {
-
-    }());
 
     var _pageUI = (function() {
 
@@ -401,12 +438,17 @@ window.init = function() {
             var from = $("#routeFrom").val();
             var to = $("#routeTo").val();
 
-            var directions = _googleMaps.findDirections(from, to);
+            var directions = _googleMapsMain.findDirections(from, to);
 
             directions.then(function(data) {
-                var points = _foursquareAPI.getPlacesPoints(_googleMaps.getPoints(data));
+                var points = _foursquareAPI.getPlacesPoints(_googleMapsMain.getPoints(data));
                 points.then(function(places) {
-                    _googleMaps.addMarkers(places);
+                    _googleMapsMain.addMarkers(places);
+
+                    $("#routeName").html(from + "&rarr;" + to);
+                    $("#formFrom").attr("value", from);
+                    $("#formTo").attr("value", to);
+                    
                 })
             });
         }
@@ -431,6 +473,6 @@ window.init = function() {
 
 
     _pageUI.bindEvents();
-    _googleMaps.init();
+    _googleMapsMain.init();
 
 };

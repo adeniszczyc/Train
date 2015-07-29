@@ -20,6 +20,7 @@ if (Meteor.isClient) {
 
     var template = this;
 
+    console.log("Debug: Init slideout");
     slideoutInstance = new Slideout({
       'menu': template.$(".menu").get(0),
       'panel': template.$(".panel").get(0),
@@ -43,7 +44,10 @@ if (Meteor.isClient) {
       var from = event.target.from.value;
       var to = event.target.to.value;
       var rating = event.target.rating.value;
- 
+      
+      console.log(from);
+      console.log(to);
+      
       // Insert a task into the collection
       Routes.insert({
         from: from,
