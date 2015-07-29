@@ -54,7 +54,7 @@ window.init = function() {
         me.getPlacesPoints = function(points) {
 
             return new Promise(function(resolve, reject) {
-                
+
                 var result = [];
                 var end = points.length;
                 var count = 0;
@@ -67,7 +67,7 @@ window.init = function() {
                         if (count == end) {
                             resolve(result);
                         }
-          
+
                     });
                 });
 
@@ -383,7 +383,7 @@ window.init = function() {
 
 
             });
-             
+
              return points;
         }
 
