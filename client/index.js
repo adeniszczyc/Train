@@ -7,7 +7,7 @@ window.init = function() {
 
         me.getLocation = function() {
 
-            
+
         };
 
         return me;
@@ -269,7 +269,7 @@ window.init = function() {
             $.each(windows, function(key, val) {
                 windows[key].close();
             });
-            
+
         }
 
         var me = {};
@@ -299,7 +299,7 @@ window.init = function() {
                     closeInfoWindows();
                     infowindow.open(map,marker);
                 });
-                
+
                 markers.push(marker);
                 windows.push(infowindow);
             })
@@ -414,11 +414,11 @@ window.init = function() {
 
         return me;
     };
-    
+
     var _googleMapsMain = new _googleMaps();
     _googleMapsMain.setId("map");
 
-    
+
     var _smallMaps = (function() {
 
         function setupMaps() {
@@ -436,7 +436,7 @@ window.init = function() {
 
                 var directions = map.findDirections(from, to);
 
-                
+
             });
         }
 
@@ -457,13 +457,13 @@ window.init = function() {
                         $("#formFrom").attr("value", from);
                         $("#formTo").attr("value", to);
                         $("#submenu").removeClass("hidden");
-                        
+
                         $("#window").hide();
                         $("#search-icon").show();
                         slideoutInstance.close();
 
 
-                        
+
                     })
                 });
 
@@ -504,11 +504,11 @@ window.init = function() {
                     $("#formFrom").attr("value", from);
                     $("#formTo").attr("value", to);
                     $("#submenu").removeClass("hidden");
-                    
+
                     $("#window").hide();
                     $("#search-icon").show();
 
-                    
+
                 })
             });
         }
@@ -532,6 +532,10 @@ window.init = function() {
             $("#routeLoad").on("submit", findRoute);
             $("#search-icon").on("click", showMenu);
             barRating();
+
+            $("#bars").change(function() {
+                $("#routeOptions").submit();
+            });
         };
 
         return me;
@@ -590,11 +594,11 @@ window.init = function() {
 
                 if (jQuery.isEmptyObject(previousLocation)) {
                     previousLocation = {lat: location.lat, lng:location.lng};
-                    run = true; 
+                    run = true;
                 }
                 else if (getDistanceFromLatLon(previousLocation.lat, previousLocation.lng, data.lat, data.lng) > 2000) {
                     previousLocation = {lat: location.lat, lng:location.lng};
-                    run = true; 
+                    run = true;
                 }
 
                 if (run) {
@@ -619,8 +623,8 @@ window.init = function() {
         return me;
 
     }());
-    
-    _mobile.init();     
+
+    _mobile.init();
     _pageUI.bindEvents();
     _googleMapsMain.init();
 

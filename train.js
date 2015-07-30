@@ -21,7 +21,7 @@ if (Meteor.isClient) {
      return !Session.get("hasRun");
   }
 
-  
+
 
   Template.home.rendered = function() {
 
@@ -44,15 +44,13 @@ if (Meteor.isClient) {
   Template.home.events({
     "submit .new-route": function (event) {
 
-
       event.preventDefault();
 
       // Get value from form element
       var from = event.target.from.value;
       var to = event.target.to.value;
       var rating = event.target.rating.value;
-
-      console.log("fs");
+      console.log("HELLO");
       $("#saveRoute").attr("value", "Saved");
       $("#saveRoute").attr("disabled", "true");
 
