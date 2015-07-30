@@ -149,13 +149,13 @@ div.overlay {
   position: absolute;
   border: 0;
   right: 0vw;
-  top: 1vh;
-  width: 2vw;
-  height: 2vw;
+  top: 0vh;
   font-size: 2vw;
+
   color: white;
   font-family: 'Oswald';
 }
+
 button.toggle-button-right:hover {
   color: #b2b2b2;
   font-style: none;
@@ -219,7 +219,7 @@ span {
   width: 100%;
   height: 220px;
 }
-@media (max-width:700px) {
+@media screen and (max-width:700px) {
   /* Styles */
   .childFlex {
     flex-direction: column;
@@ -229,14 +229,22 @@ span {
   span {
     display: none;
   }
+
+  .toggle-button-right {
+
+    font-size: 3vw;
+  }
+  .search-icon {
+    font-size: 6vh;
+  }
 }
 .toggle-button-left {
   z-index: 4;
   position: absolute;
   border: 0;
   left: 0vw;
-  top: 1vh;
-  font-size: 2.5vw;
+  top: 0vh;
+  font-size: 3vw;
   color: white;
   font-family: 'Oswald';
 }
@@ -244,7 +252,19 @@ span {
   display: none;
 }
 .search-icon {
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+.fakeFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#routeName {
+  font-family: 'Oswald';
+}
+.stretchyBox {
+  display: flex;
+  justify-content: space-between;
 }
