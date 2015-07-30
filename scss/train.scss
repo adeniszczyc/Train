@@ -29,7 +29,6 @@ h1 {
   color: white;
   z-index: 3;
   text-shadow: 2px 4px #000;
-  
 }
 .window {
   z-index: 4;
@@ -145,19 +144,19 @@ div.overlay {
 .slideout-open .slideout-menu {
   display: block;
 }
-.toggle-button {
+.toggle-button-right {
   z-index: 4;
   position: absolute;
   border: 0;
-  right: 2vw;
-  top: 2vh;
+  right: 1vw;
+  top: 1vh;
   width: 2vw;
   height: 2vw;
   font-size: 2vw;
   color: white;
   font-family: 'Oswald';
 }
-button.toggle-button:hover {
+button.toggle-button-right:hover {
   color: #b2b2b2;
   font-style: none;
 }
@@ -220,14 +219,30 @@ span {
   width: 100%;
   height: 220px;
 }
-@media (max-width:700px){
+@media (max-width:700px) {
   /* Styles */
   .childFlex {
     flex-direction: column;
-    -webkit-flex-direction: column;;
+    -webkit-flex-direction: column;
     -moz-flex-direction: column;
   }
   span {
     display: none;
   }
+}
+.toggle-button-left {
+  z-index: 4;
+  position: absolute;
+  border: 0;
+  left: 1vw;
+  top: 1vh;
+  font-size: 2.5vw;
+  color: white;
+  font-family: 'Oswald';
+}
+.search-icon {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  display: none;
 }
