@@ -5,8 +5,7 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-
-
+  <link rel="icon" sizes="16x16 32x32" href="/favicon.ico?v=2">
 </head>
 
 <body>
@@ -33,7 +32,7 @@
       <div class="window" id="window">
         <h1>TRAINTRIP</h1>
         <form id="routeLoad" action="#">
-            
+
           <div class="childFlex">
             <input type="text" id="routeFrom" class="form" placeholder="From" />
             <span>&rarr;</span>
@@ -43,13 +42,13 @@
 
         </form>
       </div>
-      
+
        <div class="submenu hidden" id="submenu">
-          <h3 id="routeName"></h3> 
+          <h3 id="routeName"></h3>
 
           <form id="routeOptions" class="new-route" action="#">
             <input type="submit" id="saveRoute" value="Save button" />
-            
+
             <input type="hidden" name="from" id="formFrom" value="" />
             <input type="hidden" name="to" id="formTo" value="" />
 
@@ -61,9 +60,9 @@
               <option value="5">Outstanding</option>
             </select>
           </form>
-  
+
         </div>
-        
+
         <div class="mapContainer">
           <div class="map" id="map"></div>
         </div>

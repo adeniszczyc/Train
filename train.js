@@ -39,12 +39,12 @@ if (Meteor.isClient) {
 
 
       event.preventDefault();
- 
+
       // Get value from form element
       var from = event.target.from.value;
       var to = event.target.to.value;
       var rating = event.target.rating.value;
-      
+
       console.log(from);
       console.log(to);
 
@@ -54,7 +54,7 @@ if (Meteor.isClient) {
         to:to,
         rating:rating
       });
- 
+
 
     }
   });
