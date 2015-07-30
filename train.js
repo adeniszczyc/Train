@@ -5,11 +5,18 @@ if (Meteor.isClient) {
   });
 
   Template.home.helpers({
-    routes: function () {
+    routes: function() {
       return Routes.find({});
     },
     places: function() {
       return Session.get('places');
+    }
+    
+  });
+
+  Template.home.helpers({
+    routeInfo: function() {
+      return Session.get('routeInfo');
     }
   });
 
@@ -27,7 +34,6 @@ if (Meteor.isClient) {
 
     var template = this;
 
-    console.log("Debug: Init slideout");
     slideoutInstance = new Slideout({
       'menu': template.$(".menu").get(0),
       'panel': template.$(".panel").get(0),
@@ -41,6 +47,25 @@ if (Meteor.isClient) {
     });
   }
 
+  Template.submenu.rendered = function() {
+  
+    var bars = $('#bars');
+
+    $("#submenu").removeClass("hidden");
+                    
+
+    bars.barrating({
+        theme: 'bars-movie'
+    });
+
+
+    var rating = bars.attr("rating");
+    console.log(rating);
+    $("#bars > option:nth-child(" + rating + ")").attr("selected", "selected");
+    
+  }
+
+
   Template.home.events({
     "submit .new-route": function (event) {
 
@@ -52,16 +77,40 @@ if (Meteor.isClient) {
       var to = event.target.to.value;
       var rating = event.target.rating.value;
 
-      console.log("fs");
+  
       $("#saveRoute").attr("value", "Saved");
       $("#saveRoute").attr("disabled", "true");
 
       // Insert a task into the collection
-      Routes.insert({
+
+      from = from.toLowerCase();
+      to = to.toLowerCase();
+
+      var route = Routes.findOne({
         from: from,
-        to:to,
-        rating:rating
+        to: to
       });
+
+
+      if (typeof route === 'undefined') {
+        Routes.insert({
+          from: from,
+          to:to,
+          rating:[rating]
+        });
+      }
+      else {
+        var data_rating = route.rating;
+      
+        data_rating.push(rating);
+   
+        Routes.update({
+          _id: route._id
+        }, {
+          $set: {rating: data_rating}
+        });
+      }
+
 
 
     }

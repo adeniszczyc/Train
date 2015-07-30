@@ -427,8 +427,7 @@ window.init = function() {
                 var to = $(this).attr("to");
                 var id = $(this).attr("id");
 
-                console.log('Debug: Init map')
-
+                
                 var map = new _googleMaps();
                 map.setId(id);
                 map.init();
@@ -453,9 +452,9 @@ window.init = function() {
                     points.then(function(places) {
                         _googleMapsMain.addMarkers(places);
 
-                        $("#routeName").html(from + "&rarr;" + to);
-                        $("#formFrom").attr("value", from);
-                        $("#formTo").attr("value", to);
+                        _meteorConnect.showRouteInfo(from, to);
+
+                        
                         $("#submenu").removeClass("hidden");
                         
                         $("#window").hide();
@@ -467,7 +466,7 @@ window.init = function() {
                     })
                 });
 
-                console.log("HELLO");
+
             })
         }
 
@@ -487,11 +486,69 @@ window.init = function() {
     });
 
 
+    var _meteorConnect = (function() {
+
+        var me = {};
+
+        me.findRoute = function(from, to) {
+            var route = Routes.findOne({
+                from: from,
+                to: to
+            });
+
+            if (typeof route === 'undefined') {
+                return false;
+            }
+            else {
+                return route;
+            }
+        }
+
+        me.showRouteInfo = function(from, to) {
+            
+            var route = _meteorConnect.findRoute(from, to);
+
+            if (route !== false) {
+
+                var rating = route.rating;
+                var sum = rating.reduce(function(prev, current) {
+                    return parseInt(prev) + parseInt(current);
+                });
+                
+                var average = Math.ceil(sum / rating.length);
+        
+
+                Session.set('routeInfo', {
+                    from: route.from,
+                    to: route.to,
+                    rating: average
+                });
+            }
+
+            else {
+                Session.set('routeInfo', {
+                    from: from,
+                    to: to,
+                    rating: 1
+                });
+            }
+
+   
+        }
+
+        return me;
+
+    }());
+
+
     var _pageUI = (function() {
 
-        function findRoute() {
+        function findRoute(e) {
+
             var from = $("#routeFrom").val();
             var to = $("#routeTo").val();
+
+
 
             var directions = _googleMapsMain.findDirections(from, to);
 
@@ -500,9 +557,8 @@ window.init = function() {
                 points.then(function(places) {
                     _googleMapsMain.addMarkers(places);
 
-                    $("#routeName").html(from + "&rarr;" + to);
-                    $("#formFrom").attr("value", from);
-                    $("#formTo").attr("value", to);
+                    _meteorConnect.showRouteInfo(from, to);
+
                     $("#submenu").removeClass("hidden");
                     
                     $("#window").hide();
@@ -511,6 +567,8 @@ window.init = function() {
                     
                 })
             });
+
+            return false;
         }
 
 
@@ -586,8 +644,7 @@ window.init = function() {
 
             location.then(function(data) {
                 var run = false;
-                console.log(data);
-
+                
                 if (jQuery.isEmptyObject(previousLocation)) {
                     previousLocation = {lat: location.lat, lng:location.lng};
                     run = true; 
@@ -600,7 +657,7 @@ window.init = function() {
                 if (run) {
                     var places = _foursquareAPI.getPlaces(data.lat, data.lng, 2000);
                     places.then(function(points) {
-                        console.log(points);
+
                         Session.set("places", points);
                     });
                 }

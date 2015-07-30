@@ -45,36 +45,10 @@
         </div>
         </form>
       </div>
-
-       <div class="submenu hidden" id="submenu">
-          <h3 id="routeName"></h3>
-
-          <form id="routeOptions" class="new-route" action="#">
-            <input type="submit" id="saveRoute" value="Save route" />
-
-            <input type="hidden" name="from" id="formFrom" value="" />
-            <input type="hidden" name="to" id="formTo" value="" />
-
-            <select id="bars" name="rating">
-              <option value="1">Poor</option>
-              <option value="2">Average</option>
-              <option value="3">Good</option>
-              <option value="4">Great</option>
-              <option value="5">Outstanding</option>
-            </select>
-          </form>
-          
-          <hr/>
-          <h4>Upcoming Places</h4>
-          <ul class="upcomingItems">
-
-            {{#each places}}
-              <p>{{name}}</p>
-            {{/each}}
-
-          </ul>
-
-        </div>
+        
+        {{#with routeInfo}}
+          {{> submenu}}
+        {{/with}}
 
         <div class="mapContainer">
           <div class="map" id="map"></div>
@@ -83,6 +57,42 @@
   </main>
 
 </template>
+
+
+<template name="submenu">
+  <div class="submenu hidden" id="submenu">
+    
+      <h3 id="routeName">{{from}} &#8594; {{to}}</h3>
+
+      <form id="routeOptions" class="new-route" action="#">
+        <input type="submit" id="saveRoute" value="Save route" />
+
+        <input type="hidden" name="from" id="formFrom" value="{{from}}" />
+        <input type="hidden" name="to" id="formTo" value="{{to}}" />
+  
+        <select id="bars" name="rating">
+          <option value="1">Poor</option>
+          <option value="2">Average</option>
+          <option value="3">Good</option>
+          <option value="4">Great</option>
+          <option value="5">Outstanding</option>
+        </select>
+      </form>
+      
+      <hr/>
+      <h4>Upcoming Places</h4>
+      <ul class="upcomingItems">
+
+        {{#each places}}
+          <p>{{name}}</p>
+        {{/each}}
+
+      </ul>
+    
+
+  </div>
+</template>
+
 
 <template name="route">
     <div class="mapListItem" from={{from}} to={{to}}>
