@@ -1,0 +1,21 @@
+ @media (max-width:700px) {
+  /* Styles */
+
+  body .mapContainer {
+	height:50%;
+  }
+
+  body .submenu {
+  	background-color:#333333;
+  	height:50%;
+  	width:100%;
+  
+  	overflow-y: scroll; /* has to be scroll, not auto */
+  	-webkit-overflow-scrolling: touch;
+  }
+  body .submenu.hidden {
+	  position: fixed;
+	  bottom: -50%;
+	  right: 0;
+  }
+}

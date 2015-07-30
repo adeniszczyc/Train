@@ -47,7 +47,7 @@
           <h3 id="routeName"></h3>
 
           <form id="routeOptions" class="new-route" action="#">
-            <input type="submit" id="saveRoute" value="Save button" />
+            <input type="submit" id="saveRoute" value="Save route" />
 
             <input type="hidden" name="from" id="formFrom" value="" />
             <input type="hidden" name="to" id="formTo" value="" />
@@ -60,6 +60,16 @@
               <option value="5">Outstanding</option>
             </select>
           </form>
+          
+          <hr/>
+          <h4>Upcoming Places</h4>
+          <ul class="upcomingItems">
+
+            {{#each places}}
+              <p>{{name}}</p>
+            {{/each}}
+
+          </ul>
 
         </div>
 

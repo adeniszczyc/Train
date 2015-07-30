@@ -21,6 +21,7 @@ html {
 body {
   font-family: 'Open Sans';
   font-weight: 700;
+  background-color:#333333;
 }
 h1 {
   font-family: 'Oswald';
@@ -78,8 +79,8 @@ h1 {
   filter:grayscale(100%);
 }
 .map {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 div.overlay {
   position: absolute;
@@ -219,6 +220,14 @@ span {
   width: 100%;
   height: 220px;
 }
+
+
+
+input[type=button], input[type=submit], input[type=button]:active, input[type=submit]:active {
+  color:#fff;
+}
+
+
 @media (max-width:700px) {
   /* Styles */
   .childFlex {

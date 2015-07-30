@@ -7,8 +7,12 @@ if (Meteor.isClient) {
   Template.home.helpers({
     routes: function () {
       return Routes.find({});
+    },
+    places: function() {
+      return Session.get('places');
     }
   });
+
   Template.home.created = function() {
     Meteor.Loader.loadJs("https://maps.googleapis.com/maps/api/js?key=AIzaSyBVrZhSoNT6AExUh70_sHNSUzenFi8wHKM&libraries=geometry,places&callback=init");
   };
@@ -16,6 +20,9 @@ if (Meteor.isClient) {
      // because the Session variable will most probably be undefined the first time
      return !Session.get("hasRun");
   }
+
+  
+
   Template.home.rendered = function() {
 
     var template = this;
@@ -45,8 +52,9 @@ if (Meteor.isClient) {
       var to = event.target.to.value;
       var rating = event.target.rating.value;
 
-      console.log(from);
-      console.log(to);
+      console.log("fs");
+      $("#saveRoute").attr("value", "Saved");
+      $("#saveRoute").attr("disabled", "true");
 
       // Insert a task into the collection
       Routes.insert({

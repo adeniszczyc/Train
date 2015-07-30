@@ -7,25 +7,7 @@ window.init = function() {
 
         me.getLocation = function() {
 
-            return new Promise(function(resolve, reject) {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-
-                        var lat = position.coords.latitude;
-                        var lng = position.coords.longitude;
-
-                        var result = {
-                            lat: lat,
-                            lng: lng
-                        }
-                        resolve(result);
-                    }, function() {
-                        return false;
-                    });
-                } else {
-                    return false;
-                }
-            });
+            
         };
 
         return me;
@@ -479,6 +461,9 @@ window.init = function() {
                         $("#window").hide();
                         $("#search-icon").show();
                         slideoutInstance.close();
+
+
+                        
                     })
                 });
 
@@ -522,6 +507,8 @@ window.init = function() {
                     
                     $("#window").hide();
                     $("#search-icon").show();
+
+                    
                 })
             });
         }
@@ -551,7 +538,89 @@ window.init = function() {
 
     }());
 
+    var _mobile = (function() {
 
+        function getLocation() {
+            return new Promise(function(resolve, reject) {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+
+                        var result = {
+                            lat: lat,
+                            lng: lng
+                        }
+                        resolve(result);
+                    }, function() {
+                        return false;
+                    });
+                } else {
+                    return false;
+                }
+            });
+        }
+
+        function deg2rad(deg) {
+            return deg * (Math.PI / 180)
+        }
+
+        function getDistanceFromLatLon(lat1, lon1, lat2, lon2) {
+            var R = 6371; // Radius of the earth in km
+            var dLat = deg2rad(lat2 - lat1); // deg2rad below
+            var dLon = deg2rad(lon2 - lon1);
+            var a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var d = R * c; // Distance in km
+            return (d * 1000);
+        }
+
+        var previousLocation = {};
+
+        function determineLocation() {
+            var location = getLocation();
+
+            location.then(function(data) {
+                var run = false;
+                console.log(data);
+
+                if (jQuery.isEmptyObject(previousLocation)) {
+                    previousLocation = {lat: location.lat, lng:location.lng};
+                    run = true; 
+                }
+                else if (getDistanceFromLatLon(previousLocation.lat, previousLocation.lng, data.lat, data.lng) > 2000) {
+                    previousLocation = {lat: location.lat, lng:location.lng};
+                    run = true; 
+                }
+
+                if (run) {
+                    var places = _foursquareAPI.getPlaces(data.lat, data.lng, 2000);
+                    places.then(function(points) {
+                        console.log(points);
+                        Session.set("places", points);
+                    });
+                }
+            })
+        }
+
+        var timer;
+
+        var me = {};
+
+        me.init = function() {
+            determineLocation();
+            timer = setTimeout(determineLocation, 1000);
+        }
+
+        return me;
+
+    }());
+    
+    _mobile.init();     
     _pageUI.bindEvents();
     _googleMapsMain.init();
 
