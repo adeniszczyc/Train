@@ -149,14 +149,14 @@ div.overlay {
   z-index: 4;
   position: absolute;
   border: 0;
-  right: 1vw;
-  top: 1vh;
-  width: 2vw;
-  height: 2vw;
+  right: 0vw;
+  top: 0vh;
   font-size: 2vw;
+
   color: white;
   font-family: 'Oswald';
 }
+
 button.toggle-button-right:hover {
   color: #b2b2b2;
   font-style: none;
@@ -221,8 +221,6 @@ span {
   height: 220px;
 }
 
-
-
 input[type=button], input[type=submit], input[type=button]:active, input[type=submit]:active {
   color:#fff;
 }
@@ -238,14 +236,23 @@ input[type=button], input[type=submit], input[type=button]:active, input[type=su
   span {
     display: none;
   }
+
+  .toggle-button-right {
+
+    font-size: 3vh;
+  }
+  .search-icon {
+    font-size: 6vh;
+    margin-top: 1vh;
+  }
 }
 .toggle-button-left {
   z-index: 4;
   position: absolute;
   border: 0;
-  left: 1vw;
-  top: 1vh;
-  font-size: 2.5vw;
+  left: 0vw;
+  top: 0vh;
+  font-size: 3vw;
   color: white;
   font-family: 'Oswald';
 }
@@ -253,7 +260,19 @@ input[type=button], input[type=submit], input[type=button]:active, input[type=su
   display: none;
 }
 .search-icon {
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+.fakeFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#routeName {
+  font-family: 'Oswald';
+}
+.stretchyBox {
+  display: flex;
+  justify-content: space-between;
 }
