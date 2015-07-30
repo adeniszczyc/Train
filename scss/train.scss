@@ -240,9 +240,11 @@ span {
   color: white;
   font-family: 'Oswald';
 }
+#search-icon-container {
+  display: none;
+}
 .search-icon {
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -o-transform: rotate(45deg);
-  display: none;
 }
