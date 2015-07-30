@@ -222,6 +222,7 @@ window.init = function() {
         var directionsPoints;
         var lines = [];
         var markers = [];
+        var windows = [];
 
         function angleBetweenTwoPoints(lat1, lng1, lat2, lng2) {
             var point1 = new google.maps.LatLng(lat1, lng1);
@@ -280,6 +281,15 @@ window.init = function() {
             });
         }
 
+
+        function closeInfoWindows() {
+
+            $.each(windows, function(key, val) {
+                windows[key].close();
+            });
+            
+        }
+
         var me = {};
 
         me.init = function() {
@@ -298,7 +308,18 @@ window.init = function() {
                       title: val.name
                 });
 
+                var contentString = val.name;
+                var infowindow = new google.maps.InfoWindow({
+                  content: contentString
+                });
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    closeInfoWindows();
+                    infowindow.open(map,marker);
+                });
+                
                 markers.push(marker);
+                windows.push(infowindow);
             })
         }
 
@@ -310,11 +331,16 @@ window.init = function() {
                 directionsDisplay.suppressInfoWindows = true;
 
                 directionsDisplay.set('directions', null);
+                var nextDay = new Date();
+                nextDay.setDate(nextDay.getDate() + 1);
+                nextDay.setHours(12);
+
                 var request = {
                     origin: from,
                     destination: to,
                     travelMode: google.maps.TravelMode.TRANSIT,
                     transitOptions: {
+                        departureTime: nextDay,
                         modes: [google.maps.TransitMode.TRAIN]
                     }
                 };
@@ -399,6 +425,11 @@ window.init = function() {
             map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
         }
 
+        me.resetMap = function() {
+            clearMarkers();
+            clearLines(lines);
+        }
+
         return me;
     };
     
@@ -408,17 +439,16 @@ window.init = function() {
     
     var _smallMaps = (function() {
 
-        var me = {};
-
-        me.init = function() {
+        function setupMaps() {
             $(".mapSmall").each(function(key, val) {
                 var from = $(this).attr("from");
                 var to = $(this).attr("to");
-                
+                var id = $(this).attr("id");
+
                 console.log('Debug: Init map')
 
                 var map = new _googleMaps();
-                map.setId(from + to);
+                map.setId(id);
                 map.init();
                 map.setDisableInteractivity();
 
@@ -426,6 +456,41 @@ window.init = function() {
 
                 
             });
+        }
+
+        function bindEvents() {
+            $(".mapListItem").on("click", function() {
+
+                var from = $(this).attr("from");
+                var to = $(this).attr("to");
+
+                var directions = _googleMapsMain.findDirections(from, to);
+
+                directions.then(function(data) {
+                    var points = _foursquareAPI.getPlacesPoints(_googleMapsMain.getPoints(data));
+                    points.then(function(places) {
+                        _googleMapsMain.addMarkers(places);
+
+                        $("#routeName").html(from + "&rarr;" + to);
+                        $("#formFrom").attr("value", from);
+                        $("#formTo").attr("value", to);
+                        $("#submenu").removeClass("hidden");
+                        
+                        $("#window").hide();
+                        $("#search-icon").show();
+                        slideoutInstance.close();
+                    })
+                });
+
+                console.log("HELLO");
+            })
+        }
+
+        var me = {};
+
+        me.init = function() {
+            setupMaps();
+            bindEvents();
         }
 
         return me;
@@ -454,7 +519,9 @@ window.init = function() {
                     $("#formFrom").attr("value", from);
                     $("#formTo").attr("value", to);
                     $("#submenu").removeClass("hidden");
+                    
                     $("#window").hide();
+                    $("#search-icon").show();
                 })
             });
         }
@@ -466,10 +533,17 @@ window.init = function() {
             });
         }
 
+        function showMenu() {
+            $("#window").show();
+            $("#submenu").hide();
+            _googleMapsMain.resetMap();
+        }
+
         var me = {};
 
         me.bindEvents = function() {
-            $("#routeSubmit").on("click", findRoute);
+            $("#routeLoad").on("submit", findRoute);
+            $("#search-icon").on("click", showMenu);
             barRating();
         };
 

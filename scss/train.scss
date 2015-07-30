@@ -162,18 +162,34 @@ div.overlay {
 .slideout-open .slideout-menu {
   display: block;
 }
-.toggle-button {
+.toggle-button-right {
   z-index: 4;
   position: absolute;
   border: 0;
-  right: 2vw;
-  top: 2vh;
-  width: 2vw;
-  height: 2vw;
+  right: 0vw;
+  top: 1vh;
+
   font-size: 2vw;
   color: white;
   font-family: 'Oswald';
 }
+
+.toggle-button-left {
+  z-index: 4;
+  position: absolute;
+  border: 0;
+  left: 0vw;
+  top: 1vh;
+
+  font-size: 2.5vw;
+  color: white;
+  font-family: 'Oswald';
+}
+
+#search-icon {
+  display:none;
+}
+
 button.toggle-button:hover {
   color: #B2B2B2;
   font-style: none;
@@ -259,3 +275,8 @@ span {
   }
 }
 
+.search-icon {
+  -webkit-transform: rotate(45deg); 
+  -moz-transform: rotate(45deg); 
+  -o-transform: rotate(45deg);
+}

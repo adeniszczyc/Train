@@ -5,6 +5,8 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+
 </head>
 
 <body>
@@ -19,7 +21,10 @@
       {{/each}}
     </div>
   </nav>
-  <button class="toggle-button">☰</button>
+  <button class="toggle-button-right">☰</button>
+  <button class="toggle-button-left" id="search-icon">
+    <div class="search-icon">&#9906;</div>
+  </button>
 
 
   <main id="panel" class="panel">
@@ -27,16 +32,20 @@
     <div class="main">
       <div class="window" id="window">
         <h1>TRAINTRIP</h1>
-        <div class="childFlex">
-          <input type="text" id="routeFrom" class="form" placeholder="From" />
-          <span>&rarr;</span>
-          <input type="text" id="routeTo" class="form" placeholder="To" />
-        </div>
-        <input type="button" id="routeSubmit" value="Find route" class="button-submit" />
+        <form id="routeLoad" action="#">
+            
+          <div class="childFlex">
+            <input type="text" id="routeFrom" class="form" placeholder="From" />
+            <span>&rarr;</span>
+            <input type="text" id="routeTo" class="form" placeholder="To" />
+          </div>
+          <input type="submit" id="routeSubmit" value="Find route" class="button-submit" />
+
+        </form>
       </div>
       
        <div class="submenu hidden" id="submenu">
-          <h3 id="routeName">Doncaster &rarr; Hull</h3> 
+          <h3 id="routeName"></h3> 
 
           <form id="routeOptions" class="new-route" action="#">
             <input type="submit" id="saveRoute" value="Save button" />
@@ -64,9 +73,9 @@
 </template>
 
 <template name="route">
-    <div class="mapListItem">
+    <div class="mapListItem" from={{from}} to={{to}}>
       <div class="mapSmallHolder">
-        <div class="mapSmall" from={{from}} to={{to}} id={{from}}{{to}}></div>
+        <div class="mapSmall" from={{from}} to={{to}} id={{_id}}></div>
       </div>
       <div class="mapSmallInfo">
       {{from}} &rarr;<br/> {{to}}

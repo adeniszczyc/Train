@@ -29,7 +29,7 @@ if (Meteor.isClient) {
       'side': "right"
     });
     // Toggle button
-    document.querySelector('.toggle-button').addEventListener('click', function() {
+    document.querySelector('.toggle-button-right').addEventListener('click', function() {
       slideoutInstance.toggle();
     });
   }
