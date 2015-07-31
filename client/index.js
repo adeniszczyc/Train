@@ -304,16 +304,16 @@ window.init = function() {
 
                     wikipedia.then(function(text) {
                         var title = "<h4>" + marker_name + "</h4>";
-                        
+
                         if (typeof text === 'undefined') {
-                            infowindow.setContent('<div class="infoWindowContent">' + title + '</div>'); 
+                            infowindow.setContent('<div class="infoWindowContent">' + title + '</div>');
                         }
                         else {
                             infowindow.setContent('<div class="infoWindowContent">' + title + text + '</div>');
                         }
                         infowindow.open(map,marker);
                     });
-                    
+
                 });
 
                 markers.push(marker);
@@ -563,7 +563,37 @@ window.init = function() {
         me.getWikipedia = function(title) {
             var title = title.replace(/ /g,"_");
             var url = "http://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + title + "&callback=?";
-                    
+
+
+            console.log(url);
+            return new Promise(function(resolve, reject) {
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    async: false,
+                    dataType: "json",
+                    success: function (data, textStatus, jqXHR) {
+
+                        var markup = data.query.pages;
+                        for (item in markup) {
+                            console.log(markup[item]);
+                            resolve(markup[item].extract);// Outputs: foo, fiz or fiz, foo
+                        }
+
+                    },
+                    error: function (errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+            });
+        }
+        me.getFlickr = function(title) {
+            var title = title.replace(/ /g,"_");
+            var url = "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={5091f0635cde7c574ecfd8aad8b5d650}" + title + "&callback=?";
+
 
             console.log(url);  
             return new Promise(function(resolve, reject) {
@@ -575,13 +605,13 @@ window.init = function() {
                     async: false,
                     dataType: "json",
                     success: function (data, textStatus, jqXHR) {
-             
+
                         var markup = data.query.pages;
                         for (item in markup) {
                             console.log(markup[item]);
                             resolve(markup[item].extract);// Outputs: foo, fiz or fiz, foo
                         }
-                        
+
                     },
                     error: function (errorMessage) {
                         console.log(errorMessage);
@@ -590,6 +620,7 @@ window.init = function() {
 
             });
         }
+
 
         return me;
 
