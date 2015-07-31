@@ -289,7 +289,7 @@ window.init = function() {
                       map: map,
                       title: val.name
                 });
-              
+
                 var contentString = val.name;
                 var infowindow = new google.maps.InfoWindow({
                   content: contentString
@@ -458,7 +458,7 @@ window.init = function() {
                         $("#submenu").removeClass("hidden");
 
                         $("#window").hide();
-                        $("#search-icon").show();
+                        $("#search-icon-container").show();
                         slideoutInstance.close();
 
 
@@ -564,10 +564,10 @@ window.init = function() {
 
                     $("#submenu").removeClass("hidden");
 
-                    
+
                     $("#loader").hide();
 
-                    $("#search-icon").show();
+                    $("#search-icon-container").show();
 
 
                 })
@@ -593,7 +593,7 @@ window.init = function() {
 
         me.bindEvents = function() {
             $("#routeLoad").on("submit", findRoute);
-            $("#search-icon").on("click", showMenu);
+            $("#search-icon-container").on("click", showMenu);
             barRating();
 
             $(document).on("change", "#bars", function(){

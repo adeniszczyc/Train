@@ -26,7 +26,7 @@ body {
 h1 {
   font-family: 'Oswald';
   letter-spacing: 25px;
-  font-size: 10vw;
+  font-size: 6vw;
   font-color: white;
   color: white;
   z-index: 3;
@@ -315,7 +315,7 @@ input[type=button], input[type=submit], input[type=button]:active, input[type=su
   position: absolute;
   top: 0;
   left: 0;
-  
+
   -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
   animation: sk-bounce 2.0s infinite ease-in-out;
 }
@@ -335,10 +335,10 @@ input[type=button], input[type=submit], input[type=button]:active, input[type=su
 }
 
 @keyframes sk-bounce {
-  0%, 100% { 
+  0%, 100% {
     transform: scale(0.0);
     -webkit-transform: scale(0.0);
-  } 50% { 
+  } 50% {
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
