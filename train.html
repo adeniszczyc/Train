@@ -37,13 +37,20 @@
 
           <div class="childFlex">
             <input type="text" id="routeFrom" class="form" placeholder="From" />
-            <span>&rarr;</span>
+            <span class="arrow">&rarr;</span>
             <input type="text" id="routeTo" class="form" placeholder="To" />
           </div>
           <div class="fakeFlex">
           <input type="submit" id="routeSubmit" value="Find route" class="button-submit" />
         </div>
         </form>
+      </div>
+
+      <div class="loader" id="loader">
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
       </div>
         
         {{#with routeInfo}}
@@ -65,12 +72,13 @@
       <h3 id="routeName">{{from}} &#8594; {{to}}</h3>
 
       <form id="routeOptions" class="new-route" action="#">
-        <input type="submit" id="saveRoute" value="Save route" />
-
+        
         <input type="hidden" name="from" id="formFrom" value="{{from}}" />
         <input type="hidden" name="to" id="formTo" value="{{to}}" />
-  
-        <select id="bars" name="rating">
+        
+        {{rating}}
+
+        <select id="bars" name="rating" rating="{{rating}}">
           <option value="1">Poor</option>
           <option value="2">Average</option>
           <option value="3">Good</option>
@@ -79,16 +87,17 @@
         </select>
       </form>
       
-      <hr/>
-      <h4>Upcoming Places</h4>
-      <ul class="upcomingItems">
+      <div class="places">
+        <hr/>
+        <h4>Upcoming Places</h4>
+        <ul class="upcomingItems">
 
-        {{#each places}}
-          <p>{{name}}</p>
-        {{/each}}
+          {{#each places}}
+            <p>{{name}}</p>
+          {{/each}}
 
-      </ul>
-    
+        </ul>
+      </div>
 
   </div>
 </template>
