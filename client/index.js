@@ -545,6 +545,9 @@ window.init = function() {
 
         function findRoute(e) {
 
+            $("#window").hide();
+            $("#loader").show();
+
             var from = $("#routeFrom").val();
             var to = $("#routeTo").val();
 
@@ -561,7 +564,9 @@ window.init = function() {
 
                     $("#submenu").removeClass("hidden");
 
-                    $("#window").hide();
+                    
+                    $("#loader").hide();
+
                     $("#search-icon").show();
 
 
@@ -591,8 +596,15 @@ window.init = function() {
             $("#search-icon").on("click", showMenu);
             barRating();
 
-            $("#bars").change(function() {
+            $(document).on("change", "#bars", function(){
+                console.log("HEY");
+                $("#bars").attr("disabled", "disabled");
                 $("#routeOptions").submit();
+
+                $("#bars").barrating({
+                    theme: 'bars-movie',
+                    readonly: true
+                });
             });
         };
 

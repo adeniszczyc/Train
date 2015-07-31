@@ -52,17 +52,17 @@ if (Meteor.isClient) {
     var bars = $('#bars');
 
     $("#submenu").removeClass("hidden");
-                    
+                  
 
+    var rating = bars.attr("rating");
+    console.log(rating);
+    $("#bars option:nth-child(" + rating + ")").attr("selected", "selected");
+    
+    
     bars.barrating({
         theme: 'bars-movie'
     });
 
-
-    var rating = bars.attr("rating");
-    console.log(rating);
-    $("#bars > option:nth-child(" + rating + ")").attr("selected", "selected");
-    
   }
 
 
