@@ -290,14 +290,30 @@ window.init = function() {
                       title: val.name
                 });
 
-                var contentString = val.name;
+                var marker_name = val.name;
                 var infowindow = new google.maps.InfoWindow({
-                  content: contentString
+                   content: marker_name,
+                   maxWidth: 300,
+                   maxHeight: 400
                 });
 
                 google.maps.event.addListener(marker, 'click', function() {
                     closeInfoWindows();
-                    infowindow.open(map,marker);
+
+                    var wikipedia = _markerInfo.getWikipedia(marker_name);
+
+                    wikipedia.then(function(text) {
+                        var title = "<h4>" + marker_name + "</h4>";
+                        
+                        if (typeof text === 'undefined') {
+                            infowindow.setContent('<div class="infoWindowContent">' + title + '</div>'); 
+                        }
+                        else {
+                            infowindow.setContent('<div class="infoWindowContent">' + title + text + '</div>');
+                        }
+                        infowindow.open(map,marker);
+                    });
+                    
                 });
 
                 markers.push(marker);
@@ -455,7 +471,7 @@ window.init = function() {
                         _meteorConnect.showRouteInfo(from, to);
 
 
-                        $("#submenu").removeClass("hidden");
+                        $("#submenu").show();
 
                         $("#window").hide();
                         $("#search-icon-container").show();
@@ -540,6 +556,44 @@ window.init = function() {
 
     }());
 
+    var _markerInfo = (function() {
+
+        var me = {};
+
+        me.getWikipedia = function(title) {
+            var title = title.replace(/ /g,"_");
+            var url = "http://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + title + "&callback=?";
+                    
+
+            console.log(url);  
+            return new Promise(function(resolve, reject) {
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    async: false,
+                    dataType: "json",
+                    success: function (data, textStatus, jqXHR) {
+             
+                        var markup = data.query.pages;
+                        for (item in markup) {
+                            console.log(markup[item]);
+                            resolve(markup[item].extract);// Outputs: foo, fiz or fiz, foo
+                        }
+                        
+                    },
+                    error: function (errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+            });
+        }
+
+        return me;
+
+    }());
 
     var _pageUI = (function() {
 
@@ -562,7 +616,7 @@ window.init = function() {
 
                     _meteorConnect.showRouteInfo(from, to);
 
-                    $("#submenu").removeClass("hidden");
+                    $("#submenu").show();
 
 
                     $("#loader").hide();

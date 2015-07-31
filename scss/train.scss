@@ -201,14 +201,14 @@ span {
   background-color: rgba(0,0,0,0.05);
 }
 .mapItem {
-  width: 200px;
+  width: 150px;
   height: 180px;
   overflow: hidden;
   text-align: center;
   padding: 5px;
 }
 .mapSmallHolder {
-  width: 200px;
+  width: 100%;
   height: 180px;
   overflow: hidden;
   text-align: center;
@@ -220,6 +220,9 @@ span {
   margin-top: -20px;
   width: 100%;
   height: 220px;
+}
+.mapSmallText {
+  padding:1rem 0;
 }
 
 input[type=button], input[type=submit], input[type=button]:active, input[type=submit]:active {
@@ -342,4 +345,21 @@ input[type=button], input[type=submit], input[type=button]:active, input[type=su
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
+}
+
+.bars-rating {
+  color: #fff; 
+}
+.bars-rating span {
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  font-size:1.2rem;
+  padding:1rem;
+  margin: 1rem;
+}
+
+.infoWindowContent {
+  max-height:400px;
+  overflow:scroll;
 }

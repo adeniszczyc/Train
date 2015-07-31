@@ -79,14 +79,12 @@
         <input type="hidden" name="from" id="formFrom" value="{{from}}" />
         <input type="hidden" name="to" id="formTo" value="{{to}}" />
         
-        {{rating}}
-        
         <select id="bars" name="rating" rating="{{rating}}">
-          <option value="1">Poor</option>
-          <option value="2">Average</option>
-          <option value="3">Good</option>
-          <option value="4">Great</option>
-          <option value="5">Outstanding</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
         </select>
       </form>
       
@@ -97,7 +95,7 @@
 
           {{#each places}}
             <p>{{name}}</p>
-            <p>Rating: {{rating}}</p>
+            
           {{/each}}
 
         </ul>
@@ -113,7 +111,18 @@
         <div class="mapSmall" from={{from}} to={{to}} id={{_id}}></div>
       </div>
       <div class="mapSmallInfo">
-      {{from}} &rarr;<br/> {{to}}
+      <select class="barsSmall" name="rating" rating="{{averageRating}}">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+      </select>
+
+      <div class="mapSmallText">
+        {{from}} &rarr; {{to}}
+      </div>
+
       </div>
     </div>
 </template>

@@ -60,11 +60,34 @@ if (Meteor.isClient) {
     
     
     bars.barrating({
-        theme: 'bars-movie'
+        theme: 'bars-movie',
+        showValues: true,
+        showSelectedRating: false,
+        wrapperClass: 'bars-rating'
     });
 
   }
 
+  Template.route.rendered = function() {
+    
+    var template = this;
+    var bars = template.$(".barsSmall");
+
+          
+
+    var rating = bars.attr("rating");
+    console.log(rating);
+    $(".barsSmall option:nth-child(" + rating + ")").attr("selected", "selected");
+    
+    
+    bars.barrating({
+        theme: 'bars-movie',
+        readOnly: true,
+        showValues: false,
+        showSelectedRating: false
+    });
+
+  }
 
   Template.home.events({
     "submit .new-route": function (event) {
@@ -106,7 +129,7 @@ if (Meteor.isClient) {
         
         data_rating.push(rating);
         
-        var sum = rating.reduce(function(prev, current) {
+        var sum = data_rating.reduce(function(prev, current) {
             return parseInt(prev) + parseInt(current);
          });
         
