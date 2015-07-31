@@ -300,20 +300,34 @@ window.init = function() {
                 google.maps.event.addListener(marker, 'click', function() {
                     closeInfoWindows();
 
-                    var wikipedia = _markerInfo.getWikipedia(marker_name);
+                    var flickr = _markerInfo.getFlickr(lat, lng);
 
-                    wikipedia.then(function(text) {
-                        var title = "<h4>" + marker_name + "</h4>";
 
-                        if (typeof text === 'undefined') {
-                            infowindow.setContent('<div class="infoWindowContent">' + title + '</div>');
-                        }
-                        else {
-                            infowindow.setContent('<div class="infoWindowContent">' + title + text + '</div>');
-                        }
-                        infowindow.open(map,marker);
+                    flickr.then(function(data) {
+                        var result = "<div class='infoWindowContent'>";
+                        $.each(data, function(key, val) {
+                            result += "<img class='imageFlickr' width='100' src=" + val.url + " />";
+                        });
+                        var wikipedia = _markerInfo.getWikipedia(marker_name);
+                    
+                        wikipedia.then(function(text) {
+                            var title = "<h4>" + marker_name + "</h4>";
+
+                            if (typeof text === 'undefined') {
+                                result += title;
+                            }
+                            else {
+                                result += title + text;
+                            }
+
+                            result += "</div>"
+                            infowindow.setContent(result);
+                            infowindow.open(map,marker);
+                        });
+
+                        
+
                     });
-
                 });
 
                 markers.push(marker);
@@ -590,28 +604,44 @@ window.init = function() {
 
             });
         }
-        me.getFlickr = function(title) {
-            var title = title.replace(/ /g,"_");
-            var url = "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={5091f0635cde7c574ecfd8aad8b5d650}" + title + "&callback=?";
+        me.getFlickr = function(lat, lng) {
+        
+            var flickr_api_key = '5091f0635cde7c574ecfd8aad8b5d650';
 
+            var searchUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search";
 
-            console.log(url);  
+            var searchReqParams = {
+                'api_key': flickr_api_key,
+                'has_geo': true,
+                'lat': lat,
+                'lon': lng,
+                'accuracy': 11,
+                'format': 'json',
+                'per_page': 3
+
+            };
+
+    
             return new Promise(function(resolve, reject) {
-
+                console.log(searchReqParams);
                 $.ajax({
-                    type: "GET",
-                    url: url,
-                    contentType: "application/json; charset=utf-8",
-                    async: false,
-                    dataType: "json",
-                    success: function (data, textStatus, jqXHR) {
+                    type: 'GET',
+                    url : searchUrl,
+                    dataType:'jsonp',
+                    cache : true,
+                    crossDomain : true,
+                    jsonp: false,
+                    jsonpCallback : 'jsonFlickrApi',
+                    data: searchReqParams,
+                    success: function (data) {
+                        var photos = data.photos.photo;
+                        $.each(photos, function(key, val) {
+                            var photo = photos[key];
+                            var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_q.jpg";
+                            photos[key].url = url;
+                        });
 
-                        var markup = data.query.pages;
-                        for (item in markup) {
-                            console.log(markup[item]);
-                            resolve(markup[item].extract);// Outputs: foo, fiz or fiz, foo
-                        }
-
+                        resolve(photos);
                     },
                     error: function (errorMessage) {
                         console.log(errorMessage);
@@ -629,7 +659,9 @@ window.init = function() {
     var _pageUI = (function() {
 
         function findRoute(e) {
-
+            $(".mapContainer").addClass("mapContainerHalf");
+            google.maps.event.trigger(map, 'resize')
+            
             $("#window").hide();
             $("#loader").show();
 

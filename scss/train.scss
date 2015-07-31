@@ -360,6 +360,11 @@ input[type=button], input[type=submit], input[type=button]:active, input[type=su
 }
 
 .infoWindowContent {
-  max-height:400px;
+  max-height:300px;
   overflow:scroll;
+}
+
+.imageFlickr {
+  display:inline-block;
+
 }
