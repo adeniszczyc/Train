@@ -289,7 +289,7 @@ window.init = function() {
                       map: map,
                       title: val.name
                 });
-
+              
                 var contentString = val.name;
                 var infowindow = new google.maps.InfoWindow({
                   content: contentString
@@ -427,7 +427,7 @@ window.init = function() {
                 var to = $(this).attr("to");
                 var id = $(this).attr("id");
 
-                
+
                 var map = new _googleMaps();
                 map.setId(id);
                 map.init();
@@ -454,7 +454,7 @@ window.init = function() {
 
                         _meteorConnect.showRouteInfo(from, to);
 
-                        
+
                         $("#submenu").removeClass("hidden");
 
                         $("#window").hide();
@@ -505,7 +505,7 @@ window.init = function() {
         }
 
         me.showRouteInfo = function(from, to) {
-            
+
             var route = _meteorConnect.findRoute(from, to);
 
             if (route !== false) {
@@ -514,9 +514,9 @@ window.init = function() {
                 var sum = rating.reduce(function(prev, current) {
                     return parseInt(prev) + parseInt(current);
                 });
-                
+
                 var average = Math.ceil(sum / rating.length);
-        
+
 
                 Session.set('routeInfo', {
                     from: route.from,
@@ -533,7 +533,7 @@ window.init = function() {
                 });
             }
 
-   
+
         }
 
         return me;
@@ -648,7 +648,7 @@ window.init = function() {
 
             location.then(function(data) {
                 var run = false;
-                
+
                 if (jQuery.isEmptyObject(previousLocation)) {
                     previousLocation = {lat: location.lat, lng:location.lng};
                     run = true;
