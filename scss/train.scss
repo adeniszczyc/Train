@@ -266,8 +266,17 @@ input[type=button], input[type=submit], input[type=button]:active, input[type=su
   -o-transform: rotate(180deg);
 }
 .fakeFlex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   justify-content: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
   align-items: center;
 }
 #routeName {
