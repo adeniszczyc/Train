@@ -14,6 +14,12 @@
 <template name="home">
 
   <nav id="menu" class="menu">
+    <div class="tabs">
+      <ul class="routesTab">
+        <li class="active" tab="1">Random</li>
+        <li tab="2">Highest Rated</li>
+      </ul>
+    </div>
     <div class="routes">
        {{#each routes}}
         {{> route}}

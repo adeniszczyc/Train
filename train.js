@@ -4,9 +4,16 @@ if (Meteor.isClient) {
   Template.home.events ({
   });
 
+  Session.set("sortBy", '1');
   Template.home.helpers({
     routes: function() {
-      return Routes.find({});
+      if (Session.equals('sortBy', '2')) {
+        return Routes.find({}, {sort: [["averageRating","desc"]]});
+      } 
+      else if (Session.equals('sortBy', '1')) {
+        return Routes.find({});
+      } 
+
     },
     places: function() {
       return Session.get('places');
@@ -79,6 +86,7 @@ if (Meteor.isClient) {
     console.log(rating);
     $(".barsSmall option:nth-child(" + rating + ")").attr("selected", "selected");
     
+    $(".barsSmall").attr("disabled", "disabled");
     
     bars.barrating({
         theme: 'bars-movie',
@@ -120,7 +128,7 @@ if (Meteor.isClient) {
           from: from,
           to: to,
           rating: [rating],
-          averageRating: rating
+          averageRating: parseInt(rating)
         });
       }
       else {
@@ -140,7 +148,7 @@ if (Meteor.isClient) {
           _id: route._id
         }, {
           $set: {rating: data_rating,
-                 averageRating: average_rating}
+                 averageRating: parseInt(average_rating)}
         });
       }
 

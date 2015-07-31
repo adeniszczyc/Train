@@ -661,7 +661,7 @@ window.init = function() {
         function findRoute(e) {
             $(".mapContainer").addClass("mapContainerHalf");
             google.maps.event.trigger(map, 'resize')
-            
+
             $("#window").hide();
             $("#loader").show();
 
@@ -706,11 +706,20 @@ window.init = function() {
             _googleMapsMain.resetMap();
         }
 
+        function changeTab() {
+
+            $(this).addClass("active");
+            $(this).siblings().removeClass("active");
+            Session.set("sortBy", $(this).attr("tab"));
+        }
         var me = {};
 
         me.bindEvents = function() {
             $("#routeLoad").on("submit", findRoute);
             $("#search-icon-container").on("click", showMenu);
+            $(".routesTab li").on("click", changeTab)
+
+
             barRating();
 
             $(document).on("change", "#bars", function(){
