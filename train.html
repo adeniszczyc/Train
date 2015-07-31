@@ -42,6 +42,9 @@
           </div>
           <div class="fakeFlex">
           <input type="submit" id="routeSubmit" value="Find route" class="button-submit" />
+          <div id="errorMsg">
+
+          </div>
         </div>
         </form>
       </div>
@@ -77,7 +80,7 @@
         <input type="hidden" name="to" id="formTo" value="{{to}}" />
         
         {{rating}}
-
+        
         <select id="bars" name="rating" rating="{{rating}}">
           <option value="1">Poor</option>
           <option value="2">Average</option>
@@ -94,6 +97,7 @@
 
           {{#each places}}
             <p>{{name}}</p>
+            <p>Rating: {{rating}}</p>
           {{/each}}
 
         </ul>

@@ -95,19 +95,29 @@ if (Meteor.isClient) {
       if (typeof route === 'undefined') {
         Routes.insert({
           from: from,
-          to:to,
-          rating:[rating]
+          to: to,
+          rating: [rating],
+          averageRating: rating
         });
       }
       else {
         var data_rating = route.rating;
-      
+        var average_rating = Math.ceil(sum / rating.length);
+        
         data_rating.push(rating);
-   
+        
+        var sum = rating.reduce(function(prev, current) {
+            return parseInt(prev) + parseInt(current);
+         });
+        
+        var average_rating = Math.ceil(sum / data_rating.length);
+
+
         Routes.update({
           _id: route._id
         }, {
-          $set: {rating: data_rating}
+          $set: {rating: data_rating,
+                 averageRating: average_rating}
         });
       }
 
