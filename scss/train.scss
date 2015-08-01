@@ -271,7 +271,7 @@ input[type=button], input[type=submit], input[type=button]:active, input[type=su
   position: absolute;
   border: 0;
   left: 0vw;
-  top: 0vh;
+  top:20px;
   font-size: 3vw;
   color: white;
   font-family: 'Oswald';
@@ -361,7 +361,7 @@ input[type=button], input[type=submit], input[type=button]:active, input[type=su
 }
 
 .bars-rating {
-  color: #fff; 
+  color: #fff;
 }
 .bars-rating span {
   display:block;
@@ -394,7 +394,7 @@ input[type=button], input[type=submit], input[type=button]:active, input[type=su
     padding:0 0 1rem 0;
     margin:0 2rem 0 0;
     cursor:pointer;
-    
+
   }
 
   li.active {
