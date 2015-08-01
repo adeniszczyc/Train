@@ -42,7 +42,7 @@ window.init = function() {
                 var count = 0;
 
                 $.each(points, function(key, val) {
-                    var places = me.getPlaces(val.lat, val.lng, 9000);
+                    var places = me.getPlaces(val.lat, val.lng, 4000);
                     places.then(function(places) {
                         count++;
                         result = result.concat(places);
@@ -740,6 +740,8 @@ window.init = function() {
 
     var _mobile = (function() {
 
+        var global = {};
+
         function getLocation() {
             return new Promise(function(resolve, reject) {
                 if (navigator.geolocation) {
@@ -797,14 +799,79 @@ window.init = function() {
                 }
 
                 if (run) {
-                    var places = _foursquareAPI.getPlaces(data.lat, data.lng, 2000);
+                    var places = _foursquareAPI.getPlaces(data.lat, data.lng, 1000);
                     places.then(function(points) {
 
+                        $.each(points, function(key, val) {
+                            console.log(val);
+                        });
+                        
                         Session.set("places", points);
                     });
                 }
             })
         }
+
+        function calculateBearing(lat2,lon2) {
+            var lat1 = parseFloat(global.lat);
+            var lon1 = parseFloat(global.lng);
+            var dLon = (lon2-lon1).toRad();
+            lat1 = lat1.toRad();
+            lat2 = lat2.toRad();
+            var y = Math.sin(dLon) * Math.cos(lat2);
+            var x = Math.cos(lat1)*Math.sin(lat2) -
+                    Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLon);
+            var brng = Math.atan2(y, x).toDeg();
+         
+            if (brng < 0) {
+                brng = 180+(180+brng);
+            }
+            return Math.floor(brng);
+        }
+
+        function getCompassHeading() {
+            var direction = global.heading;
+            if (direction !== -1) {
+                var delta, heading;
+                var dir = 0;
+                var ref = 0;
+                var delta = Math.round(direction) - ref;
+                ref = Math.round(direction);
+                if (delta < -180)
+                    delta += 360;
+                if (delta > 180)
+                    delta -= 360;
+                dir += delta;
+
+                heading = direction;
+                while (heading >= 360) {
+                    heading -= 360;
+                }
+                while (heading < 0) {
+                    heading += 360;
+                }
+                heading = Math.round(heading);
+               return heading;
+            }
+            else {
+                return 100;
+            }
+        }
+
+        function compareBearings(bearing) {
+                var user_bearing = global.heading;
+                var relative =  - (user_bearing - bearing);
+                var phrase = "";
+                if (relative < 0) relative = 360+relative;
+                if (relative >= 0 && relative < 180) {
+                    phrase = "on your right";
+                }
+                else if (relative >= 180 && relative < 360) {
+                    phrase = "on your left";
+                }
+                return phrase;
+        
+        };
 
         var timer;
 

@@ -215,20 +215,27 @@ span {
 }
 .mapSmallHolder {
   width: 100%;
-  height: 180px;
+  height: 190px;
   overflow: hidden;
   text-align: center;
 }
 .mapSmallInfo {
   padding: 1rem 0;
+  width: 220px;
+  line-height:1rem;
 }
+
+.br-theme-bars-movie .br-widget a {
+  width:19%;
+}
+
 .mapSmall {
-  margin-top: -30px;
+  margin-top: -10px;
   width: 100%;
   height: 225px;
 }
 .mapSmallText {
-  padding:1rem 0;
+  padding:2rem 0;
 }
 
 input[type=button], input[type=submit], input[type=button]:active, input[type=submit]:active {
