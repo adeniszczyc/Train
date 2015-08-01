@@ -235,6 +235,7 @@ span {
   height: 225px;
 }
 .mapSmallText {
+  line-height: 22px;
   padding:2rem 0;
 }
 
@@ -271,7 +272,7 @@ input[type=button], input[type=submit], input[type=button]:active, input[type=su
   position: absolute;
   border: 0;
   left: 0vw;
-  top: 0vh;
+  top: 20px;
   font-size: 3vw;
   color: white;
   font-family: 'Oswald';
