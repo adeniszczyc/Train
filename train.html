@@ -21,17 +21,15 @@
       </ul>
     </div>
     <div class="routes">
-       {{#each routes}}
-        {{> route}}
-      {{/each}}
+      {{#each routes}} {{> route}} {{/each}}
     </div>
   </nav>
   <div class="stretchyBox">
-  <button class="toggle-button-right">☰</button>
-  <button class="toggle-button-left" id="search-icon-container">
-    <div class="search-icon">&#9740;</div>
-  </button>
-</div>
+    <button class="toggle-button-right">☰</button>
+    <button class="toggle-button-left" id="search-icon-container">
+      <div class="search-icon">&#9740;</div>
+    </button>
+  </div>
 
 
   <main id="panel" class="panel">
@@ -47,11 +45,11 @@
             <input type="text" id="routeTo" class="form" placeholder="To" />
           </div>
           <div class="fakeFlex">
-          <input type="submit" id="routeSubmit" value="Find route" class="button-submit" />
-          <div id="errorMsg">
+            <input type="submit" id="routeSubmit" value="Find route" class="button-submit" />
+            <div id="errorMsg">
 
+            </div>
           </div>
-        </div>
         </form>
       </div>
 
@@ -61,15 +59,13 @@
           <div class="double-bounce2"></div>
         </div>
       </div>
-        
-        {{#with routeInfo}}
-          {{> submenu}}
-        {{/with}}
 
-        <div class="mapContainer">
-          <div class="map" id="map"></div>
-        </div>
-  </div>
+      {{#with routeInfo}} {{> submenu}} {{/with}}
+
+      <div class="mapContainer">
+        <div class="map" id="map"></div>
+      </div>
+    </div>
   </main>
 
 </template>
@@ -77,58 +73,58 @@
 
 <template name="submenu">
   <div class="submenu hidden" id="submenu">
-    
-      <h3 id="routeName">{{from}} &#8594; {{to}}</h3>
 
-      <form id="routeOptions" class="new-route" action="#">
-        
-        <input type="hidden" name="from" id="formFrom" value="{{from}}" />
-        <input type="hidden" name="to" id="formTo" value="{{to}}" />
-        
-        <select id="bars" name="rating" rating="{{rating}}">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </form>
-      
-      <div class="places">
-        <hr/>
-        <h4>Upcoming Places</h4>
-        <ul class="upcomingItems">
+    <h3 id="routeName">{{from}} &#8594; {{to}}</h3>
 
-          {{#each places}}
-            <p>{{name}}</p>
-            
-          {{/each}}
+    <form id="routeOptions" class="new-route" action="#">
 
-        </ul>
-      </div>
+      <input type="hidden" name="from" id="formFrom" value="{{from}}" />
+      <input type="hidden" name="to" id="formTo" value="{{to}}" />
+
+      <select id="bars" name="rating" rating="{{rating}}">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </form>
+
+    <div class="places">
+      <hr/>
+      <h4>Upcoming Places</h4>
+      <ul class="upcomingItems">
+
+        {{#each places}}
+        <p>{{name}}</p>
+
+        {{/each}}
+
+      </ul>
+    </div>
 
   </div>
 </template>
 
 
 <template name="route">
-    <div class="mapListItem" from={{from}} to={{to}}>
-      <div class="mapSmallHolder">
-        <div class="mapSmall" from={{from}} to={{to}} id={{_id}}></div>
-      </div>
-      <div class="mapSmallInfo">
+  <div class="mapListItem" from={{from}} to={{to}}>
+    <div class="mapSmallHolder">
+      <div class="mapSmall" from={{from}} to={{to}} id={{_id}}></div>
+    </div>
+    <div class="mapSmallInfo">
       <select class="barsSmall" name="rating" rating="{{averageRating}}">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
       </select>
 
       <div class="mapSmallText">
         {{from}} &rarr; {{to}}
       </div>
 
-      </div>
     </div>
+  </div>
 </template>
